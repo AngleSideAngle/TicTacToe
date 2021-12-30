@@ -10,9 +10,9 @@ public class Game {
     }
 
     public void round() {
+        printBoard();
         human.move(board);
-        opponent.move(board);
-
+        opponent.move(board);   
     }
 
     public void printBoard() {
@@ -25,30 +25,7 @@ public class Game {
                 System.out.print("----");
             System.out.println();
         }
-    }
-
-
-    /*
-    public char[][] getBoard(String[][] board, String[][] input) {
-        int r = 0;
-        int c = 0;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-            if (j % 2 == 0 && i % 2 == 0) {
-                board[i][j] = input[r][c];
-                c++;
-            }
-            System.out.print(board[i][j]);
-        }
-        c = 0;
-        if (i % 2 == 0) {
-            r++;
-        }
-        System.out.println();
-        }
-    }
-    */
-     
+    } 
 
     public boolean checkWin(String[][] board, String letter) {
         int count = 0;

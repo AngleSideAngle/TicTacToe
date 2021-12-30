@@ -3,6 +3,9 @@ public class Board {
 
     public Board(int size) {
         board = new char[size][size];
+        for (int x = 0; x < board.length; x++)
+            for (int y = 0; y < board.length; y++)
+                board[x][y] = ' ';
     }
 
     // returns true if success, returns false if out of bounds or there already is a move in that point
