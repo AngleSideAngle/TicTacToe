@@ -4,4 +4,8 @@ public class Opponent {
     public Opponent() {
         player = new Player('O');
     }
+
+    public void move(Board board) {
+
+    }
 }

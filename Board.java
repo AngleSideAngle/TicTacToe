@@ -1,11 +1,21 @@
 public class Board {
     private char[][] board;
 
-    public Board(int x, int y) {
-        board = new char[x][y];
+    public Board(int size) {
+        board = new char[size][size];
     }
 
-    public static boolean checkWin(String[][] board, String letter) {
+    // returns true if success, returns false if out of bounds or there already is a move in that point
+    public boolean setPoint(char ch, int x, int y) {
+        if (x > board.length || y > board.length || board[x][y] != ' ')
+            return false;
+
+        board[x][y] = ch;
+
+        return true;
+    }
+
+    public boolean checkWin(String[][] board, String letter) {
         int count = 0;
         for (int i = 0; i < board.length; i += 2) {
             for (int j = 0; j < board[i].length; j += 2) {
@@ -54,6 +64,7 @@ public class Board {
         return false;
     }
 
+    /*
     public char[][] getBoard(String[][] board, String[][] input) {
         int r = 0;
         int c = 0;
@@ -72,4 +83,6 @@ public class Board {
             System.out.println();
         }
     }
+    */
+
 }

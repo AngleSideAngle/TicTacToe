@@ -4,8 +4,18 @@ public class Game {
     private Opponent opponent;
 
     public Game() {
-        board = new Board(3, 3);
+        board = new Board(3);
         human = new Human();
         opponent = new Opponent();
+    }
+
+    public void round() {
+        human.move(board);
+        opponent.move(board);
+
+    }
+
+    public void printBoard() {
+        
     }
 }
