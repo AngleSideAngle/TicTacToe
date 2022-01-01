@@ -12,9 +12,8 @@ public class Board {
     public boolean setPoint(char ch, int x, int y) {
         if (x >= board.length || y >= board.length || board[x][y] != ' ')
             return false;
-
+        
         board[x][y] = ch;
-
         return true;
     }
 
