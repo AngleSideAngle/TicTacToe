@@ -18,7 +18,7 @@ public class Game {
         }
         opponent.move(board);
         if (checkWin(board.getBoard())) {
-            System.out.println("You loose, better luck next time");
+            System.out.println("You loose, better luck next time.");
             return false;
         }
         return true;
