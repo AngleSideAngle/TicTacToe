@@ -11,16 +11,25 @@ public class Game {
 
     public boolean round() {
         printBoard();
+
         human.move(board);
         if (checkWin(board.getBoard())) {
             System.out.println("You win!");
             return false;
         }
+        // checkTie is here because in a board with odd number of tiles, it will always be the first player who ties
+        if (checkTie(board.getBoard())) {
+            System.out.println("It's a tie!");
+            return false;
+        }
+
         opponent.move(board);
         if (checkWin(board.getBoard())) {
             System.out.println("You loose, better luck next time.");
             return false;
         }
+        
+
         return true;
     }
 
@@ -56,5 +65,13 @@ public class Game {
             return true;
 
         return false;
+    }
+
+    public boolean checkTie(char[][] board) {
+        for (char[] row : board)
+            for (char ch : row)
+                if (ch == ' ')
+                    return false;
+        return true;
     }
 }

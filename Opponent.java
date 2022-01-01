@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Opponent {
     private Player player;
 
