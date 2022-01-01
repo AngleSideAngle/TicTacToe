@@ -9,10 +9,15 @@ public class Game {
         opponent = new Opponent();
     }
 
-    public void round() {
+    public boolean round() {
         printBoard();
         human.move(board);
-        opponent.move(board);   
+        if (checkWin(board.getBoard()) != ' ')
+            return false;
+        opponent.move(board);
+        if (checkWin(board.getBoard()) != ' ')
+            return false;
+        return true;
     }
 
     public void printBoard() {
@@ -35,52 +40,20 @@ public class Game {
         }
     } 
 
-    public boolean checkWin(String[][] board, String letter) {
-        int count = 0;
-        for (int i = 0; i < board.length; i += 2) {
-            for (int j = 0; j < board[i].length; j += 2) {
-                if (board[i][j].equals(letter)) {
-                    count++;
-                }
-            }
-            if (count == 3) {
-                return true;
-            }
-            count = 0;
+    public char checkWin(char[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            // rows
+            if (board[i][0] == board[i][1] && board[i][1] == board[i][2])
+                return board[i][0];
+            // columns
+            if (board[0][i] == board[1][i] && board[1][i] == board[2][i])
+                return board[0][i];
         }
-        for (int i = 0; i < board.length; i += 2) {
-            for (int j = 0; j < board[i].length; j += 2) {
-                if (board[j][i].equals(letter)) {
-                    count++;
-                }
-            }
-            if (count == 3) {
-                return true;
-            }
-            count = 0;
-        }
-
-        for (int i = 0; i < board.length; i += 2) {
-            for (int j = i; j <= i; j++) {
-                if (board[i][j].equals(letter)) {
-                    count++;
-                }
-            }
-        }
-        if (count == 3) {
-            return true;
-        }
-        count = 0;
-        for (int i = board.length - 1; i >= 0; i -= 2) {
-            for (int j = 4 - i; j <= 4 - i; j++) {
-                if (board[i][j].equals(letter)) {
-                    count++;
-                }
-            }
-            if (count == 3) {
-                return true;
-            }
-        }
-        return false;
+        // diagonals
+        if (board[0][0] == board[1][1] && board[1][1] == board[2][2])
+            return board[0][0];
+        if (board[0][2] == board[1][1] && board[1][1] == board[2][0])
+            return board[0][2];
+        return ' ';
     }
 }

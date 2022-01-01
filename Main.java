@@ -1,9 +1,9 @@
 class Main {
     public static void main(String[] args) {
-        Game game = new Game();
-
         while (true) {
-            game.round();
+            Game game = new Game();
+            while (game.round());
+            break;
         }
     }
 
