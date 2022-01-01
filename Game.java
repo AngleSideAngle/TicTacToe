@@ -19,11 +19,19 @@ public class Game {
         char[][] places = board.getBoard();
         for (int i = 0; i < places.length; i++) {
             for (int j = 0; j < places.length; j++) {
-                System.out.print(" " + places + " |");
+                System.out.print(" " + places[i][j] + " ");
+                if (j != places.length - 1)
+                    System.out.print("|");
             }
-            for (int j = 0; j < places.length; j++)
-                System.out.print("----");
             System.out.println();
+            if (i != places.length - 1) {
+                for (int j = 0; j < places.length; j++) {
+                    System.out.print("---");
+                    if (j != places.length - 1)
+                        System.out.print("|");
+                }
+                System.out.println();
+            }
         }
     } 
 
