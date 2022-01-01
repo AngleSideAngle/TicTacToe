@@ -12,11 +12,15 @@ public class Game {
     public boolean round() {
         printBoard();
         human.move(board);
-        if (checkWin(board.getBoard()) != ' ')
+        if (checkWin(board.getBoard())) {
+            System.out.println("You win!");
             return false;
+        }
         opponent.move(board);
-        if (checkWin(board.getBoard()) != ' ')
+        if (checkWin(board.getBoard())) {
+            System.out.println("You loose, better luck next time");
             return false;
+        }
         return true;
     }
 
@@ -40,20 +44,17 @@ public class Game {
         }
     } 
 
-    public char checkWin(char[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            // rows
-            if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][1] == board[i][2])
-                return board[i][0];
-            // columns
-            if (board[0][i] != ' ' && board[0][i] == board[1][i] && board[1][i] == board[2][i])
-                return board[0][i];
-        }
+    public boolean checkWin(char[][] board) {
+        for (int i = 0; i < board.length; i++)
+            if (board[i][0] != ' ' && board[i][0] == board[i][1] && board[i][1] == board[i][2] // rows
+                    || board[0][i] != ' ' && board[0][i] == board[1][i] && board[1][i] == board[2][i]) // columns
+                return true;
+
         // diagonals
-        if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2])
-            return board[0][0];
-        if (board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0])
-            return board[0][2];
-        return ' ';
+        if (board[0][0] != ' ' && board[0][0] == board[1][1] && board[1][1] == board[2][2]
+                || board[0][2] != ' ' && board[0][2] == board[1][1] && board[1][1] == board[2][0])
+            return true;
+
+        return false;
     }
 }
