@@ -14,12 +14,11 @@ public class Opponent {
     }
 
 
-    /*
+    
     public int[] findNextMove(char[][] board) {
-        ArrayList<int[]> coords = new ArrayList<int[]>();
-        for (int )
+        
     }
-    */
+    
 
     public int[] findRandomMove(char[][] board) {
         int[] coords = new int[2];

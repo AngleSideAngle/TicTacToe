@@ -11,7 +11,6 @@ class Main {
         } while (playAgain());
         sc.close();
     }
-    // more code
 
     public static boolean playAgain() {
         System.out.print("Would you like to play again? Enter 1 for yes, 0 for no:\n> ");
