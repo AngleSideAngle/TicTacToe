@@ -9,4 +9,8 @@ public class Player {
     public boolean move(Board board, int x, int y) {
         return board.setPoint(sign, x, y);
     }
+
+    public char getSign() {
+        return sign;
+    }
 }
