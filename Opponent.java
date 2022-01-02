@@ -24,7 +24,7 @@ public class Opponent {
         }
     }
     
-    public int[] findNextMove(char[][] board, char ch) {
+    private int[] findNextMove(char[][] board, char ch) {
         int[] coords = {-1, -1};
         for (int i = 0; i < board.length; i++) {
             // row
@@ -66,14 +66,14 @@ public class Opponent {
         return coords;
     }
 
-    public char[] getColumn(char[][] grid, int x) {
+    private char[] getColumn(char[][] grid, int x) {
         char[] column = new char[grid.length];
         for (int i = 0; i < grid.length; i++)
             column[i] = grid[i][x];
         return column;
     }
 
-    public int countChar(char[] arr, char ch) {
+    private int countChar(char[] arr, char ch) {
         int count = 0;
         for (char test: arr)
             if (test == ch)
@@ -81,7 +81,7 @@ public class Opponent {
         return count;
     }
 
-    public int firstEmpty(char[] arr) {
+    private int firstEmpty(char[] arr) {
         for (int i = 0; i < arr.length; i++)
             if (arr[i] == ' ')
                 return i;
@@ -89,7 +89,7 @@ public class Opponent {
     }
 
     // deprecated
-    public int[] findRandomMove(char[][] board) {
+    private int[] findRandomMove(char[][] board) {
         int[] coords = new int[2];
         coords[0] = (int) (Math.random() * 4);
         coords[1] = (int) (Math.random() * 4);

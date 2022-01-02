@@ -8,6 +8,7 @@ class Main {
         do {
             Game game = new Game();
             while (game.round());
+            game.printBoard();
         } while (playAgain());
         sc.close();
     }
