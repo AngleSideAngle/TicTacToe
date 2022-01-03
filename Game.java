@@ -2,31 +2,50 @@ public class Game {
     private Board board;
     private Human human;
     private Opponent opponent;
+    private boolean playerFirst;
 
-    public Game() {
+    public Game(boolean playerGoesFirst) {
         board = new Board(3);
         human = new Human();
         opponent = new Opponent();
+        playerFirst = playerGoesFirst;
     }
 
     public boolean round() {
-        printBoard();
-
-        human.move(board);
-        if (checkWin(board.getBoard())) {
-            System.out.println("You win!");
-            return false;
+        if (playerFirst) {
+            printBoard();
+            human.move(board);
+            if (checkWin(board.getBoard())) {
+                System.out.println("You win!");
+                return false;
+            }
+        } else {
+            opponent.move(board);
+            if (checkWin(board.getBoard())) {
+                System.out.println("You loose, better luck next time.");
+                return false;
+            }
         }
+
         // checkTie is here because in a board with odd number of tiles, it will always be the first player who ties
         if (checkTie(board.getBoard())) {
             System.out.println("It's a tie!");
             return false;
         }
 
-        opponent.move(board);
-        if (checkWin(board.getBoard())) {
-            System.out.println("You loose, better luck next time.");
-            return false;
+        if (playerFirst) {
+            opponent.move(board);
+            if (checkWin(board.getBoard())) {
+                System.out.println("You loose, better luck next time.");
+                return false;
+            }
+        } else {
+            printBoard();
+            human.move(board);
+            if (checkWin(board.getBoard())) {
+                System.out.println("You win!");
+                return false;
+            }
         }
         
         return true;
