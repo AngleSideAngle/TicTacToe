@@ -1,14 +1,13 @@
-public class Human {
-    private Player player;
+public class Human extends Player {
 
     public Human() {
-        player = new Player('X');
+        super('X');
     }
 
     public void move(Board board) {
         while (true) {
             int[] coords = prompt();
-            if (player.move(board, coords[0], coords[1]))
+            if (move(board, coords[0], coords[1]))
                 break;
             System.out.println("Enter a valid coordinate pair in the form X, Y");
         }

@@ -1,16 +1,15 @@
-public class Opponent {
-    private Player player;
+public class Opponent extends Player {
     private char opp;
 
     public Opponent() {
-        player = new Player('O');
+        super('O');
         opp = 'X';
     }
 
     public void move(Board board) {
         while (true) {
             // offensive
-            int[] coords = findNextMove(board.getBoard(), player.getSign());
+            int[] coords = findNextMove(board.getBoard(), getSign());
             if (coords[0] == -1)
                 // defensive
                 coords = findNextMove(board.getBoard(), opp);
@@ -19,7 +18,7 @@ public class Opponent {
                 coords = findRandomMove(board.getBoard());
 
             // attempts to place at points
-            if (player.move(board, coords[0], coords[1]))
+            if (move(board, coords[0], coords[1]))
                 break;
         }
     }
