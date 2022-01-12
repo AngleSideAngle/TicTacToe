@@ -1,34 +1,44 @@
 public class Opponent extends Player {
     private char opp;
+    boolean goesFirst;
+    int[] starting = {0, 0};
 
-    public Opponent() {
+    public Opponent(boolean playerFirst) {
         super('O');
         opp = 'X';
+        goesFirst = !playerFirst;
     }
 
     public void move(Board board) {
-        while (true) {
+        for (int threshold = 2; threshold > 0; threshold--) {
             // offensive
-            int[] coords = findNextMove(board.getBoard(), getSign());
+            int[] coords = findNextMove(board.getBoard(), getSign(), threshold);
+            // defensive
             if (coords[0] == -1)
-                // defensive
-                coords = findNextMove(board.getBoard(), opp);
-            if (coords[0] == -1)
-                // random
-                coords = findRandomMove(board.getBoard());
+                coords = findNextMove(board.getBoard(), opp, threshold);
 
-            // attempts to place at points
             if (move(board, coords[0], coords[1]))
-                break;
+                return;
+        }
+
+        if (goesFirst && move(board, starting[0], starting[1]))
+            return;
+                    
+        // random
+        while (true) {
+            int[] coords = findRandomMove(board.getBoard());
+
+            if (move(board, coords[0], coords[1]))
+                return;
         }
     }
     
-    private int[] findNextMove(char[][] board, char ch) {
+    private int[] findNextMove(char[][] board, char ch, int threshold) {
         int[] coords = {-1, -1};
         for (int i = 0; i < board.length; i++) {
             // row
             char[] row = board[i];
-            if (countChar(row, ch) == 2 && firstEmpty(row) != -1) {
+            if (countChar(row, ch) == threshold && firstEmpty(row) != -1) {
                 coords[0] = i;
                 coords[1] = firstEmpty(row);
                 break;
@@ -36,7 +46,7 @@ public class Opponent extends Player {
 
             // column
             char[] column = getColumn(board, i);
-            if (countChar(column, ch) == 2 && firstEmpty(column) != -1) {
+            if (countChar(column, ch) == threshold && firstEmpty(column) != -1) {
                 coords[0] = firstEmpty(column);
                 coords[1] = i;
             }
@@ -50,13 +60,13 @@ public class Opponent extends Player {
         }
 
         // top left to bottom right
-        if (countChar(diagonal, ch) == 2 && firstEmpty(diagonal) != -1) {
+        if (countChar(diagonal, ch) == threshold && firstEmpty(diagonal) != -1) {
             coords[0] = firstEmpty(diagonal);
             coords[1] = firstEmpty(diagonal);
         }
 
         // top right to bottom left
-        if (countChar(reverse, ch) == 2 && firstEmpty(reverse) != -1) {
+        if (countChar(reverse, ch) == threshold && firstEmpty(reverse) != -1) {
             coords[0] = firstEmpty(reverse);
             coords[1] = board.length - 1 - firstEmpty(reverse);
         }
@@ -87,7 +97,7 @@ public class Opponent extends Player {
         return -1;
     }
 
-    // deprecated
+    // last resort
     private int[] findRandomMove(char[][] board) {
         int[] coords = new int[2];
         coords[0] = (int) (Math.random() * 4);

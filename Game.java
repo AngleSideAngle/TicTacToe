@@ -7,7 +7,7 @@ public class Game {
     public Game(boolean playerGoesFirst) {
         board = new Board(3);
         human = new Human();
-        opponent = new Opponent();
+        opponent = new Opponent(playerGoesFirst);
         playerFirst = playerGoesFirst;
     }
 

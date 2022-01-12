@@ -10,7 +10,7 @@ public class Board {
 
     // returns true if success, returns false if out of bounds or there already is a move in that point
     public boolean setPoint(char ch, int x, int y) {
-        if (x >= board.length || y >= board.length || board[x][y] != ' ')
+        if (x >= board.length || y >= board.length || x < 0 || y < 0 || board[x][y] != ' ')
             return false;
         
         board[x][y] = ch;
