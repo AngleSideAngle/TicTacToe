@@ -1,5 +1,5 @@
 public class Player {
-    protected char sign;
+    private char sign;
 
     public Player(char s) {
         sign = s;

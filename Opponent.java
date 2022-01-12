@@ -21,6 +21,7 @@ public class Opponent extends Player {
                 return;
         }
 
+        // tries a starting move
         if (goesFirst && move(board, starting[0], starting[1]))
             return;
                     
