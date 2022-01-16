@@ -17,6 +17,7 @@ public class Human extends Player {
         int[] coords = new int[2];
         System.out.print("Enter X,Y coordinates for your move: ");
         String pair = Main.sc.nextLine();
+        pair = pair.trim();   
         try {
             coords[0] = Integer.parseInt(pair.substring(0, 1)) - 1;
             coords[1] = Integer.parseInt(pair.substring(pair.length() - 1, pair.length())) - 1;
